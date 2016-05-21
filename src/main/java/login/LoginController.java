@@ -3,29 +3,25 @@ package login;
 import java.io.IOException;
 
 import Controller.Controller;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import menu.MenuController;
 
 public class LoginController {
-
 	
-	
-	private TextField userName;
-	private TextField password;
 	private MenuController mcont;
 	private Stage stage;
 	
 	@FXML
-	TextField userNameField;
+	private TextField userNameField;
 	
 	@FXML
-	TextField passwordField;
+	private TextField passwordField;
 	
 	@FXML
-	public void loginButtonAction() throws IOException{
+	public void loginButtonAction(ActionEvent event) throws IOException{
 		Controller.connectToServer(userNameField.getText(), passwordField.getText(), "LOGIN");
 		stage.close();
 	}
@@ -36,7 +32,7 @@ public class LoginController {
 	}
 	
 	@FXML
-	public void registerButtonAction() throws IOException{
+	public void registerButtonAction(ActionEvent event) throws IOException{
 		Controller.connectToServer(userNameField.getText(), passwordField.getText(), "REGISTER");
 	}
 
@@ -47,6 +43,5 @@ public class LoginController {
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
-	
-	
+
 }

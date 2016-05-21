@@ -93,11 +93,14 @@ public class Server {
 		serverSocket = new ServerSocket(5555,0,InetAddress.getLoopbackAddress());
 		players = new ArrayList();
 		setupRegisteredUsers();
+		ConnectionListener connectionListener=new ConnectionListener();
+		connectionListener.run();
 	}
 
 	private void setupRegisteredUsers() throws JsonIOException, JsonSyntaxException, FileNotFoundException {
 		File file;
-		if ((file = new File(Server.class.getResource(filename).getFile())).exists()) {
+		file = new File(Server.class.getClassLoader().getResource(filename).getFile());
+		if (file.exists()) {
 			JsonParser parser = new JsonParser();
 			JsonArray array = parser.parse(new FileReader(file)).getAsJsonObject().get("players").getAsJsonArray();
 			registeredUsers=gson.fromJson(array, type);
