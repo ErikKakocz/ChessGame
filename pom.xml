@@ -4,6 +4,18 @@
 	<groupId>hu.inf.unideb</groupId>
 	<artifactId>Chessgame</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
+	<organization>
+		<name>Shadowwolf Industries</name>
+	</organization>
+	<inceptionYear>2016</inceptionYear>
+	
+	<licenses>
+		<license>
+			<name>Apache License 2.0</name>
+		</license>
+	</licenses>
+	
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -24,5 +36,6 @@
 			<version>0.3m</version>
 		</dependency>
 	</dependencies>
+	
 
 </project>
