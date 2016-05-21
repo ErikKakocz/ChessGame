@@ -1,0 +1,13 @@
+players=[
+		{
+			"playername":"wolf",
+			"password":"$2a$04$NDDv.q11QK37VL0asCq3xemIrJzqNvqrASswUva0SEOzi/X4EIHim"
+			"elo":"100"
+		}
+		{
+			"playername":"fox",
+			"password":"$2a$04$8DrAs2c20KbylJ9EY/HX1Ol1E3oGGdPfld4nfBnl6QCKWuF3H9kB."
+			"elo":"100"
+		}
+
+]

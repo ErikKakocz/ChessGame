@@ -1,0 +1,164 @@
+{
+"pieces":[{ "Type":"Rook",
+			"Row":"0",
+			"Column":"0",
+			"color":"Black"
+		  },
+		  { "Type":"Knight",
+			"Row":"0",
+			"Column":"1",
+			"color":"Black"
+		  },
+		  { "Type":"Bishop",
+			"Row":"0",
+			"Column":"2",
+			"color":"Black"
+		  },
+		  { "Type":"King",
+			"Row":"0",
+			"Column":"3",
+			"color":"Black"
+		  },
+		  { "Type":"Queen",
+			"Row":"0",
+			"Column":"4",
+			"color":"Black"
+		  },
+		  { "Type":"Bishop",
+			"Row":"0",
+			"Column":"5",
+			"color":"Black"
+		  },
+		  { "Type":"Knight",
+			"Row":"0",
+			"Column":"6",
+			"color":"Black"
+		  },
+		  { "Type":"Rook",
+			"Row":"0",
+			"Column":"7",
+			"color":"Black"
+		  },
+		  { "Type":"Pawn",
+			"Row":"1",
+			"Column":"0",
+			"color":"Black"
+		  },
+		  { "Type":"Pawn",
+			"Row":"1",
+			"Column":"1",
+			"color":"Black"
+		  },
+		  { "Type":"Pawn",
+			"Row":"1",
+			"Column":"2",
+			"color":"Black"
+		  },
+		  { "Type":"Pawn",
+			"Row":"1",
+			"Column":"3",
+			"color":"Black"
+		  },
+		  { "Type":"Pawn",
+			"Row":"1",
+			"Column":"4",
+			"color":"Black"
+		  },
+		  { "Type":"Pawn",
+			"Row":"1",
+			"Column":"5",
+			"color":"Black"
+		  },
+		  { "Type":"Pawn",
+			"Row":"1",
+			"Column":"6",
+			"color":"Black"
+		  },
+		  { "Type":"Pawn",
+			"Row":"1",
+			"Column":"7",
+			"color":"Black"
+		  },
+		  { "Type":"Rook",
+			"Row":"7",
+			"Column":"0",
+			"color":"White"
+		  },
+		  { "Type":"Knight",
+			"Row":"7",
+			"Column":"1",
+			"color":"White"
+		  },
+		  { "Type":"Bishop",
+			"Row":"7",
+			"Column":"2",
+			"color":"White"
+		  },
+		  { "Type":"King",
+			"Row":"7",
+			"Column":"3",
+			"color":"White"
+		  },
+		  { "Type":"Queen",
+			"Row":"7",
+			"Column":"4",
+			"color":"White"
+		  },
+		  { "Type":"Bishop",
+			"Row":"7",
+			"Column":"5",
+			"color":"White"
+		  },
+		  { "Type":"Knight",
+			"Row":"7",
+			"Column":"6",
+			"color":"White"
+		  },
+		  { "Type":"Rook",
+			"Row":"7",
+			"Column":"7",
+			"color":"White"
+		  },
+		  { "Type":"Pawn",
+			"Row":"6",
+			"Column":"0",
+			"color":"White"
+		  },
+		  { "Type":"Pawn",
+			"Row":"6",
+			"Column":"1",
+			"color":"White"
+		  },
+		  { "Type":"Pawn",
+			"Row":"6",
+			"Column":"2",
+			"color":"White"
+		  },
+		  { "Type":"Pawn",
+			"Row":"6",
+			"Column":"3",
+			"color":"White"
+		  },
+		  { "Type":"Pawn",
+			"Row":"6",
+			"Column":"4",
+			"color":"White"
+		  },
+		  { "Type":"Pawn",
+			"Row":"6",
+			"Column":"5",
+			"color":"White"
+		  },
+		  { "Type":"Pawn",
+			"Row":"6",
+			"Column":"6",
+			"color":"White"
+		  },
+		  { "Type":"Pawn",
+			"Row":"6",
+			"Column":"7",
+			"color":"White"
+		  }
+
+		]
+}
