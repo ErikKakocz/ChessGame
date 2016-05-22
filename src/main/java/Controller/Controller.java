@@ -1,11 +1,15 @@
 package Controller;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import com.google.gson.JsonArray;
@@ -30,8 +34,8 @@ public final class Controller{
 	static menu.MenuController mCont;
 	static Server server;
 	static Socket sock;
-	static InputStreamReader reader;
-	static OutputStreamWriter writer;
+	static DataInputStream reader;
+	static DataOutputStream writer;
 	
 	public Controller(){
 		table = new Table();
@@ -77,14 +81,25 @@ public final class Controller{
 
 	public static void connectToServer(String username,String pass,String action) throws IOException{
 		sock=new Socket();
-		reader=new InputStreamReader(sock.getInputStream());
-		writer=new OutputStreamWriter(sock.getOutputStream());
-		
-		if(reader.read()==0){
-			writer.write(username, 0, username.length());
-			writer.write(pass, 0, pass.length());
-			writer.write(action);
+		sock.connect(new InetSocketAddress(InetAddress.getLoopbackAddress(),5555));
+		reader=new DataInputStream(sock.getInputStream());
+		writer=new DataOutputStream(sock.getOutputStream());
+		int code=reader.read();
+		System.out.println(code);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		if(code==0){
+			System.out.println("anyád");
+			writer.writeUTF(username);
+			writer.writeUTF(pass);
+			writer.writeUTF(action);
+			System.out.println("anyád");
+		}
+		System.out.println(reader.read());
 	}
 	
 	static File getJsonFile(String filename) {

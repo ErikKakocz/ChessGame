@@ -25,8 +25,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField id="userNameField" GridPane.columnIndex="1" />
-                  <TextField id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="userNameField" GridPane.columnIndex="1" />
+                  <TextField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label prefHeight="17.0" prefWidth="106.0" text="Username:" />
                   <Label prefHeight="17.0" prefWidth="103.0" text="Password:" GridPane.rowIndex="1" />
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#loginButtonAction" prefHeight="25.0" prefWidth="72.0" text="login" textOverrun="CLIP" GridPane.rowIndex="2" />

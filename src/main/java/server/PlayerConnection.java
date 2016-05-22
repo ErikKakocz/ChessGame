@@ -1,19 +1,19 @@
 package server;
 
-import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 
 import player.Player;
 
 public class PlayerConnection {
 
 	private Player player;
-	private OutputStreamWriter out;
-	private InputStreamReader in;
+	private DataOutputStream out;
+	private DataInputStream in;
 	
-	public PlayerConnection(Player player, OutputStreamWriter out, InputStreamReader in) {
+	public PlayerConnection(Player player, DataOutputStream out, DataInputStream in) {
 		super();
 		this.player = player;
 		this.out = out;
@@ -28,21 +28,22 @@ public class PlayerConnection {
 		this.player = player;
 	}
 
-	public OutputStreamWriter getOut() {
+	public DataOutputStream getOut() {
 		return out;
 	}
 
-	public void setOut(OutputStreamWriter out) {
+	public void setOut(DataOutputStream out) {
 		this.out = out;
 	}
 
-	public InputStreamReader getIn() {
+	public DataInputStream getIn() {
 		return in;
 	}
 
-	public void setIn(InputStreamReader in) {
+	public void setIn(DataInputStream in) {
 		this.in = in;
 	}
-	
+
+
 
 }

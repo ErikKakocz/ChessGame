@@ -1,12 +1,12 @@
 package server;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.net.InetAddress;
@@ -40,19 +40,19 @@ public class Server {
 	class ConnectionListener implements Runnable{
 
 		public void run() {
-			char[] charbuffer=new char[100];
 			String uname=null,pass=null;
 			GameAction action=null;
 			while(true)
 			{
-				OutputStream outputStream=null;
-				InputStream inputStream=null;
+				DataOutputStream outputStream=null;
+				DataInputStream inputStream=null;
 				Socket sock;
-				InputStreamReader in=null;
+				
 				try {
 					sock=serverSocket.accept();
-					outputStream=sock.getOutputStream();
-					inputStream=sock.getInputStream();
+					System.out.println(sock==null);
+					outputStream=new DataOutputStream(sock.getOutputStream());
+					inputStream=new DataInputStream(sock.getInputStream());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -64,25 +64,36 @@ public class Server {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+				System.out.println("anyád");
 				if(inputStream!=null)
 					try {
-						in=new InputStreamReader(inputStream);
-						in.read(charbuffer);
-						uname=new String(charbuffer);
-						in.read(charbuffer);
-						pass=new String(charbuffer);
-						in.read(charbuffer);
-						action=Player.gameActionTranslator(new String(charbuffer));
+						
+						
+						System.out.println("anyád");
+						uname=inputStream.readUTF();
+						System.out.println(uname);
+						pass=inputStream.readUTF();
+						System.out.println(pass);
+						action=Player.gameActionTranslator(inputStream.readUTF());
+						System.out.println(action);
+						
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+				System.out.println("anyád");
 				if(uname!=null&&pass!=null&&action!=null)
 					switch(action){
-					case LOGIN:{login(uname,pass,in,new OutputStreamWriter(outputStream));break;}
-					case REGISTER:{registerUser(uname,pass);break;}
+					case LOGIN:{login(uname,pass,inputStream,new DataOutputStream(outputStream));System.out.println("loginsucces");break;}
+					case REGISTER:{registerUser(uname,pass);System.out.println("regsucces");break;}
 					default:break;
 					}
+				try {
+					outputStream.write(1);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -91,7 +102,6 @@ public class Server {
 	
 	public Server() throws IOException {
 		serverSocket = new ServerSocket(5555,0,InetAddress.getLoopbackAddress());
-		players = new ArrayList();
 		setupRegisteredUsers();
 		ConnectionListener connectionListener=new ConnectionListener();
 		connectionListener.run();
@@ -99,13 +109,12 @@ public class Server {
 
 	private void setupRegisteredUsers() throws JsonIOException, JsonSyntaxException, FileNotFoundException {
 		File file;
-		file = new File(Server.class.getClassLoader().getResource(filename).getFile());
-		if (file.exists()) {
-			JsonParser parser = new JsonParser();
-			JsonArray array = parser.parse(new FileReader(file)).getAsJsonObject().get("players").getAsJsonArray();
-			registeredUsers=gson.fromJson(array, type);
-
-		}
+		file = new File(getClass().getClassLoader().getResource(filename).getPath());
+		System.out.println("file status: "+file==null);
+		JsonParser parser = new JsonParser();
+		JsonArray array = parser.parse(new FileReader(file)).getAsJsonObject().get("players").getAsJsonArray();
+		registeredUsers=gson.fromJson(array, type);
+		System.out.println("REGUSERS:"+registeredUsers==null);
 
 	}
 	
@@ -116,7 +125,7 @@ public class Server {
 	}
 	
 	
-	private void login(String name,String password,InputStreamReader in,OutputStreamWriter out){
+	private void login(String name,String password,DataInputStream in,DataOutputStream out){
 		if(validateLogin(name,password))
 			new PlayerConnection(findUser(name),out,in);
 	}
