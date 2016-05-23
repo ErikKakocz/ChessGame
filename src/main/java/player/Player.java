@@ -51,6 +51,13 @@ public class Player {
 		this.password = password;
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Player [elo=" + elo + ", name=" + name + ", password=" + password + "]";
+	}
+
 	public static GameAction gameActionTranslator(String s){
 		if("LOGIN".equals(s))
 			return GameAction.LOGIN;

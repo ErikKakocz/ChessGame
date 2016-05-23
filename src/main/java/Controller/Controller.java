@@ -93,11 +93,9 @@ public final class Controller{
 			e.printStackTrace();
 		}
 		if(code==0){
-			System.out.println("anyád");
 			writer.writeUTF(username);
 			writer.writeUTF(pass);
 			writer.writeUTF(action);
-			System.out.println("anyád");
 		}
 		System.out.println(reader.read());
 	}

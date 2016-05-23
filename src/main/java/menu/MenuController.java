@@ -36,9 +36,8 @@ public class MenuController extends Application {
 	public void createStage(Stage s) throws Exception{
 		setStage(s);
 		FXMLLoader loader=new FXMLLoader();
-		//loader.setResources(getClass().getClassLoader().getResource("Text_en.properties").);
+		System.out.println("setloc: "+(getClass().getResource("Menu.fxml")==null));
 		loader.setLocation(getClass().getResource("Menu.fxml"));
-		//System.out.println((props==null)+String.valueOf(++i));
 		stage.setTitle("Chess");
 		AnchorPane ancpane=(AnchorPane)loader.load();
 		Scene scene=new Scene(ancpane);

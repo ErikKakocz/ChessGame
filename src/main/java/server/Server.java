@@ -6,12 +6,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +23,10 @@ import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+import Controller.Controller;
 import player.GameAction;
 import player.Player;
+import player.PlayerAlreadyExistsException;
 
 public class Server {
 
@@ -64,12 +65,8 @@ public class Server {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				System.out.println("anyád");
 				if(inputStream!=null)
-					try {
-						
-						
-						System.out.println("anyád");
+					try {	
 						uname=inputStream.readUTF();
 						System.out.println(uname);
 						pass=inputStream.readUTF();
@@ -81,11 +78,15 @@ public class Server {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				System.out.println("anyád");
 				if(uname!=null&&pass!=null&&action!=null)
 					switch(action){
 					case LOGIN:{login(uname,pass,inputStream,new DataOutputStream(outputStream));System.out.println("loginsucces");break;}
-					case REGISTER:{registerUser(uname,pass);System.out.println("regsucces");break;}
+					case REGISTER:{try {
+						registerUser(uname,pass);
+					} catch (PlayerAlreadyExistsException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}break;}
 					default:break;
 					}
 				try {
@@ -108,19 +109,30 @@ public class Server {
 	}
 
 	private void setupRegisteredUsers() throws JsonIOException, JsonSyntaxException, FileNotFoundException {
-		File file;
-		file = new File(getClass().getClassLoader().getResource(filename).getPath());
-		System.out.println("file status: "+file==null);
+		//URL url=Controller.class.getClassLoader().getResource(filename);
+		
+		//System.out.println("URL: "+(url==null));
+		String fileUrl="c:\\Users\\User\\Documents\\players.json";
+		
+		File file = new File(fileUrl);
+		System.out.println("file status: "+(file==null)+file.toString());
 		JsonParser parser = new JsonParser();
-		JsonArray array = parser.parse(new FileReader(file)).getAsJsonObject().get("players").getAsJsonArray();
+		FileReader fr=new FileReader(file);
+		System.out.println("FileReader: "+(fr!=null));
+		JsonArray array = parser.parse(fr).getAsJsonObject().get("players").getAsJsonArray();
+		
 		registeredUsers=gson.fromJson(array, type);
+		for(Player p:registeredUsers)
+			System.out.println(p.toString());
 		System.out.println("REGUSERS:"+registeredUsers==null);
 
 	}
 	
-	private void registerUser(String name,String password){
-		BCrypt bcrypt=new BCrypt();
-		registeredUsers.add(new Player(name,bcrypt.hashpw(password, bcrypt.gensalt())));
+	private void registerUser(String name,String password) throws PlayerAlreadyExistsException{
+		for(PlayerConnection p:players)
+			if(p.getPlayer().getName().equals(name))
+				throw new PlayerAlreadyExistsException();
+		registeredUsers.add(new Player(name,BCrypt.hashpw(password, BCrypt.gensalt())));
 		
 	}
 	
@@ -150,6 +162,14 @@ public class Server {
 	}
 	
 	private void logout(PlayerConnection p){
+		try {
+			p.getIn().close();
+			p.getOut().close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		players.remove(p);
 	}
 
