@@ -6,8 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -19,6 +17,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pieces.Color;
 import pieces.Type;
@@ -108,8 +109,6 @@ public final class Controller{
 		else 
 			return null;
 	}
-
-	
 
 	static void movePiece(int fromRow, int fromCol, int toRow, int toCol) {
 		if (validateMove(fromRow, fromCol, toRow, toCol) && notObstructed(fromRow, fromCol, toRow, toCol) && !(table

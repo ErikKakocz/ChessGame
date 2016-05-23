@@ -41,7 +41,6 @@ public class MenuController extends Application {
 		stage.setTitle("Chess");
 		AnchorPane ancpane=(AnchorPane)loader.load();
 		Scene scene=new Scene(ancpane);
-		
 		stage.setScene(scene);
 		stage.show();
 		
